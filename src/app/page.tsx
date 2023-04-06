@@ -2,7 +2,7 @@ import HeroInput from "./components/HeroInput";
 
 export default async function Home() {
   const res = await fetch("http://localhost:3000/api/heroes", {
-    cache: "no-cache",
+    cache: "no-store",
   });
   const json = await res.json();
   const heroes = json.heroes;
