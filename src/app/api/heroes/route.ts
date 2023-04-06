@@ -3,7 +3,7 @@ type Position = "Tank" | "Assassin" | "Mage" | "Support" | "Marksman";
 type Hero = {
   name: string;
   gender: "Male" | "Female" | "Other";
-  position: Position[];
+  // position: Position[];
 };
 
 export async function GET(request: Request) {

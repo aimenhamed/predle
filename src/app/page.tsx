@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <>
       <h1>Predle</h1>
-      <div>Guess today's Predecessor hero!</div>
+      <div>Guess today&apos;s Predecessor hero!</div>
       <HeroInput todaysHero={hero.name} heroes={heroes} />
     </>
   );

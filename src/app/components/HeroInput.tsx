@@ -27,20 +27,20 @@ export default function HeroInput({ todaysHero, heroes }: HeroInputProps) {
       <div>
         <select onChange={(e) => setValue(e.target.value)}>
           {heroes.map((h, idx) => (
-            <option id={h.name + idx} value={h.name}>
+            <option key={h.name + idx} value={h.name}>
               {h.name}
             </option>
           ))}
         </select>
         <button onClick={guess}>Enter</button>
       </div>
-      {correct && <>Correct! Today's hero is: {todaysHero}</>}
+      {correct && <>Correct! Today&apos;s hero is: {todaysHero}</>}
       <h3>Previous guesses {guesses.length}:</h3>
       {guesses.length > 0 && (
         <div>
           <ul>
             {guesses.map((guess) => (
-              <li id={guess}>{guess}</li>
+              <li key={guess}>{guess}</li>
             ))}
           </ul>
         </div>
