@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+enum RangeType {
+  MELEE
+  RANGED
+}
+
+enum Position {
+  OFFLANE
+  JUNGLE
+  MID
+  CARRY
+  SUPPORT
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum PowerType {
+  MAGICAL
+  PHYSICAL
+}
+
+model HeroPosition {
+  id       Int      @id @default(autoincrement())
+  hero     Hero     @relation(fields: [heroId], references: [id])
+  heroId   Int
+  position Position
+
+  @@index([heroId])
+}
+
+model HeroPowerType {
+  id        Int       @id @default(autoincrement())
+  hero      Hero      @relation(fields: [heroId], references: [id])
+  heroId    Int
+  powerType PowerType
+
+  @@index([heroId])
+}
+
+model Hero {
+  id           Int             @id @default(autoincrement())
+  name         String
+  gender       Gender
+  rangeType    RangeType
+  heroPosition HeroPosition[]
+  powerType    HeroPowerType[]
+}
+
+model CurrentHero {
+  id     Int @id @default(autoincrement())
+  heroId Int
+}

@@ -1,32 +1,56 @@
 "use client";
 
+import { CompleteHero } from "@/lib/types";
 import { useState } from "react";
+import Attributes from "./Attributes";
 
 type HeroInputProps = {
-  todaysHero: string;
-  heroes: any[];
+  todaysHero: CompleteHero;
+  heroes: CompleteHero[];
 };
 
+function formatName(name: string) {
+  if (name === "The Fey") {
+    return "fey";
+  }
+  return name.replace(" ", "-").replace(".", "").toLowerCase();
+}
+
 export default function HeroInput({ todaysHero, heroes }: HeroInputProps) {
-  const [value, setValue] = useState<string>("");
-  const [guesses, setGuesses] = useState<string[]>([]);
+  const [value, setValue] = useState<CompleteHero>();
+  const [guesses, setGuesses] = useState<CompleteHero[]>([]);
   const [correct, setCorrect] = useState<boolean>(false);
+  const [unguessedHeroes, setUnguessedHeroes] =
+    useState<CompleteHero[]>(heroes);
 
   const guess = async () => {
-    if (value === todaysHero) {
+    if (!value) return;
+    if (value.name === todaysHero.name) {
       setCorrect(true);
-      alert("Correct!");
-    } else {
-      setValue("");
-      setGuesses([...guesses, value]);
+      return;
+    }
+    setValue(undefined);
+    setGuesses([...guesses, value]);
+    setUnguessedHeroes(unguessedHeroes.filter((uh) => uh.name !== value.name));
+    if (guesses.length === 5) {
+      setCorrect(true);
     }
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div>
-        <select onChange={(e) => setValue(e.target.value)}>
-          {heroes.map((h, idx) => (
+    <div className="flex flex-col w-max text-zinc-50">
+      <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <select
+          className="text-black"
+          onChange={(e) => {
+            const heroWithName = heroes.find((h) => h.name === e.target.value);
+            if (heroWithName) {
+              setValue(heroWithName);
+            }
+          }}
+          style={{ width: "50%" }}
+        >
+          {unguessedHeroes.map((h, idx) => (
             <option key={h.name + idx} value={h.name}>
               {h.name}
             </option>
@@ -34,13 +58,26 @@ export default function HeroInput({ todaysHero, heroes }: HeroInputProps) {
         </select>
         <button onClick={guess}>Enter</button>
       </div>
-      {correct && <>Correct! Today&apos;s hero is: {todaysHero}</>}
-      <h3>Previous guesses {guesses.length}:</h3>
+      {correct && <>Correct! Today&apos;s hero is: {todaysHero.name}</>}
+      <h3 style={{ margin: "1rem 0" }}>Guesses {guesses.length}:</h3>
       {guesses.length > 0 && (
-        <div>
+        <div className="flex">
           <ul>
             {guesses.map((guess) => (
-              <li key={guess}>{guess}</li>
+              <div
+                key={guess.id}
+                className="flex"
+                style={{ marginBottom: "1rem" }}
+              >
+                <img
+                  src={`https://predecessor.pro/images/heroes/portraits/${formatName(
+                    guess.name
+                  )}.webp`}
+                  className="h-12 w-12"
+                  style={{ marginRight: "0.5rem" }}
+                />
+                <Attributes hero={guess} todaysHero={todaysHero} />
+              </div>
             ))}
           </ul>
         </div>
