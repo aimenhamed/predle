@@ -24,10 +24,10 @@ export default async function Home() {
         overflowY: "scroll",
       }}
     >
-      <div className="flex flex-col h-screen items-center">
-        <div className="p-8 bg-neutral-500 bg-opacity-80 rounded-md flex items-center flex-col w-96">
-          <h1 className="text-3x1 font-bold underline text-zinc-50">Predle</h1>
-          <p className="text-zinc-50" style={{ marginBottom: "2rem" }}>
+      <div className="flex flex-col h-screen items-center text-zinc-50 text-5xl">
+        <div className="p-8 bg-neutral-500 bg-opacity-80 rounded-md flex items-center flex-col">
+          <h1 className="font-bold underline">Predle</h1>
+          <p style={{ margin: "2rem 0" }}>
             Guess today&apos;s Predecessor hero!
           </p>
           <HeroInput todaysHero={res.todaysHero} heroes={res.heroes} />

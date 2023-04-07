@@ -38,8 +38,14 @@ export default function HeroInput({ todaysHero, heroes }: HeroInputProps) {
   };
 
   return (
-    <div className="flex flex-col w-max text-zinc-50">
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
+    <>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          width: "100%",
+        }}
+      >
         <select
           className="text-black"
           onChange={(e) => {
@@ -59,29 +65,27 @@ export default function HeroInput({ todaysHero, heroes }: HeroInputProps) {
         <button onClick={guess}>Enter</button>
       </div>
       {correct && <>Correct! Today&apos;s hero is: {todaysHero.name}</>}
-      <h3 style={{ margin: "1rem 0" }}>Guesses {guesses.length}:</h3>
+      <h3 style={{ margin: "2rem 0" }}>Guesses {guesses.length}:</h3>
       {guesses.length > 0 && (
-        <div className="flex">
-          <ul>
-            {guesses.map((guess) => (
-              <div
-                key={guess.id}
-                className="flex"
-                style={{ marginBottom: "1rem" }}
-              >
-                <img
-                  src={`https://predecessor.pro/images/heroes/portraits/${formatName(
-                    guess.name
-                  )}.webp`}
-                  className="h-12 w-12"
-                  style={{ marginRight: "0.5rem" }}
-                />
-                <Attributes hero={guess} todaysHero={todaysHero} />
-              </div>
-            ))}
-          </ul>
-        </div>
+        <ul>
+          {guesses.map((guess) => (
+            <div
+              key={guess.id}
+              className="flex text-3xl"
+              style={{ marginBottom: "1rem" }}
+            >
+              <img
+                src={`https://predecessor.pro/images/heroes/portraits/${formatName(
+                  guess.name
+                )}.webp`}
+                className="h-40 w-40"
+                style={{ marginRight: "0.5rem" }}
+              />
+              <Attributes hero={guess} todaysHero={todaysHero} />
+            </div>
+          ))}
+        </ul>
       )}
-    </div>
+    </>
   );
 }

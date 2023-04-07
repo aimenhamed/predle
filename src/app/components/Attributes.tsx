@@ -21,36 +21,40 @@ export default function Attributes({ hero, todaysHero }: AttributesProps) {
   return (
     <>
       <div
-        className={`flex justify-center items-center box-border h-12 w-12
-                 bg-${
-                   todaysHero.name === hero.name ? "green" : "red"
-                 }-500 m4 text-xs`}
-        style={{ marginRight: "0.5rem" }}
+        className={`flex justify-center items-center box-border h-40 w-40
+                 ${
+                   todaysHero.name === hero.name ? "bg-green-500" : "bg-red-500"
+                 }`}
+        style={{ margin: "0 0.5rem" }}
       >
         {hero.name}
       </div>
       <div
-        className={`flex justify-center items-center box-border h-12 w-12
-                 bg-${
-                   todaysHero.gender === hero.gender ? "green" : "red"
-                 }-500 m4 text-xs`}
-        style={{ marginRight: "0.5rem" }}
+        className={`flex justify-center items-center box-border h-40 w-40
+                 ${
+                   todaysHero.gender === hero.gender
+                     ? "bg-green-500"
+                     : "bg-red-500"
+                 }`}
+        style={{ margin: "0 0.5rem" }}
       >
         {hero.gender}
       </div>
       <div
-        className={`flex justify-center items-center box-border h-12 w-12
-        bg-${
-          todaysHero.rangeType === hero.rangeType ? "green" : "red"
-        }-500 m4 text-xs`}
-        style={{ marginRight: "0.5rem" }}
+        className={`flex justify-center items-center box-border h-40 w-40
+        ${
+          todaysHero.rangeType === hero.rangeType
+            ? "bg-green-500"
+            : "bg-red-500"
+        }`}
+        style={{ margin: "0 0.5rem" }}
       >
         {hero.rangeType}
       </div>
       <div
-        className={`flex justify-center items-center box-border h-12 w-12
-        bg-${positionOverlap ? "green" : "red"}-500 m4 text-xs`}
-        style={{ marginRight: "0.5rem" }}
+        className={`flex justify-center items-center box-border h-40 w-40
+        ${positionOverlap ? "bg-green-500" : "bg-red-500"}`}
+        style={{ margin: "0 0.5rem" }}
       >
         {
           (positionOverlap
@@ -59,9 +63,9 @@ export default function Attributes({ hero, todaysHero }: AttributesProps) {
         }
       </div>
       <div
-        className={`flex justify-center items-center box-border h-12 w-12
-        bg-${powerTypeOverlap ? "green" : "red"}-500 m4 text-xs`}
-        style={{ marginRight: "0.5rem" }}
+        className={`flex justify-center items-center box-border h-40 w-40
+        ${powerTypeOverlap ? "bg-green-500" : "bg-red-500"}`}
+        style={{ margin: "0 0.5rem" }}
       >
         {
           (powerTypeOverlap
