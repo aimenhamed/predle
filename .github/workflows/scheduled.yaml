@@ -10,4 +10,4 @@ jobs:
         run: |
           curl --request POST \
           --url 'https://predle.vercel.app/api/admin/hero/answer' \
-          --header 'Authorization: ${{ secrets.CRON_PASS }}'
+          --header "Authorization: $CRON_PASS"
