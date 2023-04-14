@@ -9,6 +9,8 @@ on:
 jobs:
   cron:
     runs-on: ubuntu-latest
+    env:
+      credentials: ${{ secrets.CRON_PASS }}
     steps:
       - name: daily-cron-job
         run: |
