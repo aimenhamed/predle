@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: daily-cron-job
         run: |
+          echo $CRON_PASS
           curl --request POST \
           --url 'https://predle.vercel.app/api/admin/hero/answer' \
           --header "Authorization: $CRON_PASS"

@@ -3,6 +3,7 @@
 import { CompleteHero } from "@/lib/types";
 import { useState } from "react";
 import Attributes from "./Attributes";
+import Select from "react-select";
 
 type HeroInputProps = {
   todaysHero: CompleteHero;
@@ -42,27 +43,29 @@ export default function HeroInput({ todaysHero, heroes }: HeroInputProps) {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-around",
+          justifyContent: "space-between",
           width: "100%",
         }}
       >
-        <select
-          className="text-black"
-          onChange={(e) => {
-            const heroWithName = heroes.find((h) => h.name === e.target.value);
-            if (heroWithName) {
-              setValue(heroWithName);
-            }
+        <Select
+          options={unguessedHeroes.map((uh) => ({ label: uh.name, value: uh }))}
+          onChange={(e) => e?.value && setValue(e.value)}
+          styles={{
+            control: (styles) => ({ ...styles, width: "25rem" }),
+            option: (styles) => ({ ...styles, color: "black" }),
           }}
-          style={{ width: "50%" }}
-        >
-          {unguessedHeroes.map((h, idx) => (
-            <option key={h.name + idx} value={h.name}>
-              {h.name}
-            </option>
-          ))}
-        </select>
-        <button onClick={guess}>Enter</button>
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary25: "#DEEBFF",
+              primary: "#4C9AFF",
+            },
+          })}
+        />
+        <button onClick={guess} disabled={!value}>
+          Enter
+        </button>
       </div>
       {correct && <>Correct! Today&apos;s hero is: {todaysHero.name}</>}
       <h3 style={{ margin: "2rem 0" }}>Guesses {guesses.length}:</h3>
