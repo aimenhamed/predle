@@ -10,13 +10,10 @@ jobs:
   cron:
     runs-on: ubuntu-latest
     env:
-      credentials: ${{ secrets.CRON_PASS }}
+      CRON_PASS: ${{ secrets.CRON_PASS }}
     steps:
       - name: daily-cron-job
         run: |
-          echo $SHELL
-          echo $CRON_PASS
-
-#           curl --request POST \
-# --url 'https://predle.vercel.app/api/admin/hero/answer' \
-# --header "Authorization: $CRON_PASS"
+          curl --request POST \
+          --url 'https://predle.vercel.app/api/admin/hero/answer' \
+          --header "Authorization: $CRON_PASS"
