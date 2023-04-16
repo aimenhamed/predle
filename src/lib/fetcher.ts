@@ -4,6 +4,9 @@ export default async function fetcher(url: string) {
       ? "http://localhost:3000"
       : "http://predle.vercel.app";
 
-  const res = await fetch(`${endpoint}${url}`, { cache: "no-store" });
+  const res = await fetch(`${endpoint}${url}`, {
+    cache: "no-store",
+    headers: { Authorization: process.env.PASSWORD! },
+  });
   return res.json();
 }

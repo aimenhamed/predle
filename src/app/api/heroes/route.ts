@@ -1,6 +1,10 @@
 import { prisma } from "@/lib/db";
 
 export async function GET(request: Request) {
+  const headers = request.headers;
+  if (headers.get("Authorization") !== process.env.PASSWORD) {
+    return new Response("Not allowed", { status: 401 });
+  }
   const heroes = await prisma.hero.findMany({
     include: {
       heroPosition: true,

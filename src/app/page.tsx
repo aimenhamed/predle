@@ -1,19 +1,13 @@
 import fetcher from "@/lib/fetcher";
 import { CompleteHero } from "@/lib/types";
-// import testData from "./data";
 import Main from "./components/Main";
-
-export const revalidate = 3600;
 
 export default async function Home() {
   const res = (await fetcher("/api/heroes")) as {
     todaysHero: CompleteHero;
     heroes: CompleteHero[];
   };
-  // const res = testData as {
-  //   todaysHero: CompleteHero;
-  //   heroes: CompleteHero[];
-  // };
+
   return (
     <div
       style={{
