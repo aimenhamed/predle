@@ -1,9 +1,9 @@
-import fetcher from "@/lib/fetcher";
 import { CompleteHero } from "@/lib/types";
 import Main from "./components/Main";
+import { getHeroes } from "@/lib/getHeroes";
 
 export default async function Home() {
-  const res = (await fetcher("/api/heroes")) as {
+  const res = (await getHeroes()) as {
     todaysHero: CompleteHero;
     heroes: CompleteHero[];
   };

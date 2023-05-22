@@ -8,5 +8,8 @@ export default async function fetcher(url: string) {
     cache: "no-store",
     headers: { Authorization: process.env.PASSWORD! },
   });
+  if (!res.ok) {
+    return undefined;
+  }
   return res.json();
 }
